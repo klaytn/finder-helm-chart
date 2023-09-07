@@ -1,0 +1,31 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: finder-config-map
+# data:
+#   AWS_SECRETS_MANAGER_REGION: "{{ .Values.secretManager.REGION }}"
+#   AWS_SECRETS_MANAGER_ARN: "{{ .Values.secretManager.ARN }}"
+#   MYSQL_CYPRESS_01_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_CYPRESS_01_ENDPOINT }}"
+#   MYSQL_CYPRESS_0201_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_CYPRESS_0201_ENDPOINT }}"
+#   MYSQL_CYPRESS_0202_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_CYPRESS_0202_ENDPOINT }}"
+#   MYSQL_CYPRESS_0203_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_CYPRESS_0203_ENDPOINT }}"
+#   MYSQL_CYPRESS_0204_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_CYPRESS_0204_ENDPOINT }}"
+#   MYSQL_CYPRESS_0205_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_CYPRESS_0205_ENDPOINT }}"
+#   MYSQL_CYPRESS_03_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_CYPRESS_03_ENDPOINT }}"
+#   MYSQL_BAOBAB_01_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_BAOBAB_01_ENDPOINT }}"
+#   MYSQL_BAOBAB_02_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_BAOBAB_02_ENDPOINT }}"
+#   MYSQL_BAOBAB_03_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_BAOBAB_03_ENDPOINT }}"
+#   MYSQL_COMMON_ENDPOINT: "{{ .Values.datbaseEndpoint.MYSQL_COMMON_ENDPOINT }}"
+#   AWS_S3_REGION: "{{ .Values.s3.AWS_S3_REGION }}"
+#   AWS_S3_PRIVATE_BUCKET: "{{ .Values.s3.AWS_S3_PRIVATE_BUCKET }}"
+#   AWS_S3_PUBLIC_BUCKET: "{{ .Values.s3.AWS_S3_PUBLIC_BUCKET }}"
+#   AWS_CDN_URL: "{{ .Values.s3.URL }}"
+#   CAVER_CYPRESS_RPC_ENDPOINT: "{{ .Values.chain.CAVER_CYPRESS_RPC_ENDPOINT }}"
+#   CAVER_BAOBAB_RPC_ENDPOINT: "{{ .Values.chain.CAVER_BAOBAB_RPC_ENDPOINT }}"
+#   OPEN_SEARCH_URL: "{{ .Values.openSearch.OPEN_SEARCH_URL }}"
+#   REDIS_ENDPOINT: "{{ .Values.redis.REDIS_ENDPOINT }}"
+#   ZOOKEEPER_ENDPOINT: "{{ .Values.zookeeper.ZOOKEEPER_ENDPOINT }}"
+#   COMPILER_API_ENDPOINT: "{{ .Values.apiEndpoint.COMPILER_API_ENDPOINT }}"
+#   PAPI_API_CYPRESS_ENDPOINT: "{{ .Values.apiEndpoint.PAPI_API_CYPRESS_ENDPOINT }}"
+#   PAPI_API_BAOBAB_ENDPOINT: "{{ .Values.apiEndpoint.PAPI_API_BAOBAB_ENDPOINT }}"
+#   CMC_PRO_API_KEY: "{{ .Values.apiKeys.CMC_PRO_API_KEY }}"

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "finder.fullname" . }}-oapi
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "finder.fullname" . }}-oapi
+  replicas: {{ .Values.api.oapi.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0      
+  template:
+    metadata:
+      labels:
+        app: {{ include "finder.fullname" . }}-oapi
+    spec:
+      serviceAccountName: {{ .Values.global.serviceAccountName }}
+      terminationGracePeriodSeconds: 60
+      tolerations:
+        - key: "type"
+          value: "service-ng"
+          effect: "NoSchedule"    
+      containers:
+        - name: {{ include "finder.fullname" . }}-oapi
+          image: "{{ .Values.api.oapi.images.repository }}:{{ .Values.api.oapi.images.tag }}"
+          imagePullPolicy: Always
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 40"]
+          envFrom:
+            # - configMapRef:
+            #     name: finder-config-map
+            - secretRef:
+                name: finder-secrets
+          env:
+            {{ .Values.api.oapi.env | toYaml | nindent 12 }}          
+            - name: JAVA_OPTS
+              value: -Xms1G -Xmx1G                        
+
+          ports:
+            - containerPort: 8080
+          resources:
+            {{- toYaml .Values.api.oapi.resources | nindent 12 }}  
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 3              

@@ -1,0 +1,114 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: finder-secrets
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: vault-backend
+    kind: SecretStore
+  data:
+    - secretKey: MYSQL_BAOBAB_01_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_BAOBAB_01_ENDPOINT
+    - secretKey: MYSQL_BAOBAB_02_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_BAOBAB_02_ENDPOINT
+    - secretKey: MYSQL_BAOBAB_03_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_BAOBAB_03_ENDPOINT
+    - secretKey: MYSQL_CYPRESS_01_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_CYPRESS_01_ENDPOINT
+    - secretKey: MYSQL_CYPRESS_0201_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_CYPRESS_0201_ENDPOINT
+    - secretKey: MYSQL_CYPRESS_0202_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_CYPRESS_0202_ENDPOINT
+    - secretKey: MYSQL_CYPRESS_0203_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_CYPRESS_0203_ENDPOINT
+    - secretKey: MYSQL_CYPRESS_0204_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_CYPRESS_0204_ENDPOINT
+    - secretKey: MYSQL_CYPRESS_0205_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_CYPRESS_0205_ENDPOINT
+    - secretKey: MYSQL_CYPRESS_03_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_CYPRESS_03_ENDPOINT
+    - secretKey: MYSQL_COMMON_ENDPOINT
+      remoteRef:
+        key: finder
+        property: MYSQL_COMMON_ENDPOINT
+    - secretKey: AWS_S3_REGION
+      remoteRef:
+        key: finder
+        property: AWS_S3_REGION
+    - secretKey: AWS_SECRETS_MANAGER_ARN
+      remoteRef:
+        key: finder
+        property: AWS_SECRETS_MANAGER_ARN
+    - secretKey: AWS_SECRETS_MANAGER_REGION
+      remoteRef:
+        key: finder
+        property: AWS_SECRETS_MANAGER_REGION
+    - secretKey: AWS_S3_PRIVATE_BUCKET
+      remoteRef:
+        key: finder
+        property: AWS_S3_PRIVATE_BUCKET
+    - secretKey: AWS_S3_PUBLIC_BUCKET
+      remoteRef:
+        key: finder
+        property: AWS_S3_PUBLIC_BUCKET
+    - secretKey: AWS_CDN_URL
+      remoteRef:
+        key: finder
+        property: AWS_CDN_URL
+    - secretKey: CAVER_CYPRESS_RPC_ENDPOINT
+      remoteRef:
+        key: finder
+        property: CAVER_CYPRESS_RPC_ENDPOINT
+    - secretKey: CAVER_BAOBAB_RPC_ENDPOINT
+      remoteRef:
+        key: finder
+        property: CAVER_BAOBAB_RPC_ENDPOINT
+    - secretKey: OPEN_SEARCH_URL
+      remoteRef:
+        key: finder
+        property: OPEN_SEARCH_URL
+    - secretKey: REDIS_ENDPOINT
+      remoteRef:
+        key: finder
+        property: REDIS_ENDPOINT
+    - secretKey: ZOOKEEPER_ENDPOINT
+      remoteRef:
+        key: finder
+        property: ZOOKEEPER_ENDPOINT
+    - secretKey: COMPILER_API_ENDPOINT
+      remoteRef:
+        key: finder
+        property: COMPILER_API_ENDPOINT
+    - secretKey: PAPI_API_CYPRESS_ENDPOINT
+      remoteRef:
+        key: finder
+        property: PAPI_API_CYPRESS_ENDPOINT
+    - secretKey: PAPI_API_BAOBAB_ENDPOINT
+      remoteRef:
+        key: finder
+        property: PAPI_API_BAOBAB_ENDPOINT
+    - secretKey: CMC_PRO_API_KEY
+      remoteRef:
+        key: finder
+        property: CMC_PRO_API_KEY
