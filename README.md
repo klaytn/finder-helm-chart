@@ -30,7 +30,7 @@ kubectl create namespace finder
 | global.network                   | `baobab` or `cypress`                                                                              |
 | global.profile                   | `stag`, `prod`                                                                                     |
 | global.namespace                 | create service aacount with the namespace                                                          |
-| global.serviceAccountRoleArn     | service account role arn created                                                                   |
+| global.serviceAccountEmail       | service account role arn created                                                                   |
 | secretManager.REGION             | aws secret manager regsion                                                                         |
 | secretManager.ARN                | aws secret manager ARN `arn:aws:secretsmanager:${region}:${identity-number}:secret:${secret name}` |
 | s3.AWS_S3_REGION                 | AWS S3 region                                                                                      |
@@ -74,52 +74,7 @@ global:
   profile: prod
   namespace: finder
   serviceAccountName: sa-finder-service
-  serviceAccountRoleArn: arn:aws:iam:************:role/klaytn_cluster_prod-finder-****
-
-secretManager:
-  REGION: ap-northeast-2
-  ARN: arn:aws:secretsmanager:ap-northeast-2:************:secret:****
-
-s3:
-  AWS_S3_REGION: ap-northeast-2
-  AWS_S3_PRIVATE_BUCKET: klaytn-prod-finder-private
-  AWS_S3_PUBLIC_BUCKET: klaytn-prod-common-public
-
-cdn:
-  URL: https://cdn.********.io
-
-chain:
-  CAVER_CYPRESS_RPC_ENDPOINT: https://public-en.klaytnfinder.io/v1/cypress
-  CAVER_BAOBAB_RPC_ENDPOINT: https://public-en.klaytnfinder.io/v1/baobab
-
-datbaseEndpoint:
-  MYSQL_CYPRESS_01_ENDPOINT: ********.rds.amazonaws.com
-  MYSQL_BAOBAB_01_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0201_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0202_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0203_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0204_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0205_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_BAOBAB_02_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_03_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_BAOBAB_03_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_COMMON_ENDPOINT: ******.rds.amazonaws.com
-
-openSearch:
-  OPEN_SEARCH_URL: https://******.ap-northeast-2.es.amazonaws.com
-
-redis:
-  REDIS_ENDPOINT: ***.clustercfg.apn2.cache.amazonaws.com:6379
-
-zookeeper:
-  ZOOKEEPER_ENDPOINT: zk.****.io:2181
-
-apiEndpoint:
-  COMPILER_API_ENDPOINT: https://compiler-api.******.io/
-  PAPI_API_CYPRESS_ENDPOINT: https://test-prod-cypress-papi.******.io
-  PAPI_API_BAOBAB_ENDPOINT: https://test-prod-baobab-papi.******.io
-apiKeys:
-  CMC_PRO_API_KEY: ******
+  serviceAccountEmail: arn:aws:iam:************:role/klaytn_cluster_prod-finder-****
 
 api:
   front:
@@ -208,7 +163,6 @@ compiler:
     limits:
       cpu: 1000m
       memory: 2Gi
-
 ```
 
 Installing with my-values.yaml file

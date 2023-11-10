@@ -1,66 +1,18 @@
 global:
   nameOverride: finder
+  projectId: klaytn-finder
   network:
   #[baobab, cypress]
   profile:
   #[dev, stag, prod]
-
-  serviceAccountName:
-  namespace:
-  serviceAccountRoleArn:
-
-secretManager:
-  REGION:
-  ARN:
-
-s3:
-  AWS_S3_REGION:
-  AWS_S3_PRIVATE_BUCKET:
-  AWS_S3_PUBLIC_BUCKET:
-
-cdn:
-  URL:
-
-chain:
-  CAVER_CYPRESS_RPC_ENDPOINT:
-  CAVER_BAOBAB_RPC_ENDPOINT:
-
-datbaseEndpoint:
-  MYSQL_CYPRESS_01_ENDPOINT:
-  MYSQL_BAOBAB_01_ENDPOINT:
-  MYSQL_CYPRESS_0201_ENDPOINT:
-  MYSQL_CYPRESS_0202_ENDPOINT:
-  MYSQL_CYPRESS_0203_ENDPOINT:
-  MYSQL_CYPRESS_0204_ENDPOINT:
-  MYSQL_CYPRESS_0205_ENDPOINT:
-  MYSQL_BAOBAB_02_ENDPOINT:
-  MYSQL_CYPRESS_03_ENDPOINT:
-  MYSQL_BAOBAB_03_ENDPOINT:
-  MYSQL_COMMON_ENDPOINT:
-
-apiKeys:
-  CMC_PRO_API_KEY:
-
-openSearch:
-  OPEN_SEARCH_URL:
-
-redis:
-  REDIS_ENDPOINT:
-
-zookeeper:
-  ZOOKEEPER_ENDPOINT:
-
-apiEndpoint:
-  COMPILER_API_ENDPOINT:
-  PAPI_API_CYPRESS_ENDPOINT:
-  PAPI_API_BAOBAB_ENDPOINT:
+  serviceAccountName: sa-finder-service
+  namespace: finder
 
 api:
   front:
-    ingress: #alb.ingress.kubernetes.io/group.name
     images:
-      repository: public.ecr.aws/y1e5c4k9/finder-api
-      tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
+      repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
+      tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
     host:
     replicas: 1
     env:
@@ -75,8 +27,8 @@ api:
         memory: 2Gi
   papi:
     images:
-      repository: public.ecr.aws/y1e5c4k9/finder-api
-      tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
+      repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
+      tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
     host:
     replicas: 1
     env:
@@ -91,8 +43,8 @@ api:
         memory: 2Gi
   oapi:
     images:
-      repository: public.ecr.aws/y1e5c4k9/finder-oapi
-      tag: public-06-d873c1e4b5760469a43918edd22ea17336b36db8
+      repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-oapi
+      tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
     host:
     replicas: 1
     env:
@@ -109,8 +61,8 @@ api:
 worker:
   enabled: false
   images:
-    repository: public.ecr.aws/y1e5c4k9/finder-worker
-    tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
+    repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-worker
+    tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
   host:
   replicas: 1
   env:
@@ -127,8 +79,8 @@ worker:
 compiler:
   enabled: false
   images:
-    repository: public.ecr.aws/y1e5c4k9/finder-compiler
-    tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
+    repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-compiler-api
+    tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
   host:
   replicas: 1
   env:

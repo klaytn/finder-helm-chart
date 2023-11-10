@@ -21,7 +21,7 @@ spec:
       terminationGracePeriodSeconds: 60
       tolerations:
         - key: "type"
-          value: "service-ng"
+          value: "finder-node-pool"
           effect: "NoSchedule"    
       containers:
         - name: {{ include "finder.fullname" . }}-compiler

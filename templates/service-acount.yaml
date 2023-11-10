@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ .Values.global.serviceAccountName }}
-  namespace:  {{ .Values.global.namespace }}
+  name: { { .Values.global.serviceAccountName } }
+  namespace: { { .Values.global.namespace } }
   annotations:
-    eks.amazonaws.com/role-arn: {{ .Values.global.serviceAccountRoleArn}}
+    iam.gke.io/gcp-service-account: { { .Values.global.serviceAccountName } }@{ { .Values.global.projectId } }.iam.gserviceaccount.com
