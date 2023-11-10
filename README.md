@@ -24,25 +24,14 @@ create namepsace finder
 kubectl create namespace finder
 ```
 
-| parameter                        | value                                                                                              |
-| -------------------------------- | -------------------------------------------------------------------------------------------------- |
-| global.nameOverride              | override defulat name `finder`                                                                     |
-| global.network                   | `baobab` or `cypress`                                                                              |
-| global.profile                   | `stag`, `prod`                                                                                     |
-| global.namespace                 | create service aacount with the namespace                                                          |
-| global.serviceAccountEmail       | service account role arn created                                                                   |
-| secretManager.REGION             | aws secret manager regsion                                                                         |
-| secretManager.ARN                | aws secret manager ARN `arn:aws:secretsmanager:${region}:${identity-number}:secret:${secret name}` |
-| s3.AWS_S3_REGION                 | AWS S3 region                                                                                      |
-| s3.AWS_S3_PRIVATE_BUCKET         | AWS S3 private bucket name                                                                         |
-| s3.AWS_S3_PUBLIC_BUCKET          | AWS S3 public bucket name                                                                          |
-| cdn.URL                          | CDN service URL                                                                                    |
-| chain.CAVER_CYPRESS_RPC_ENDPOINT | Klaytn Cypress RPC endpoint                                                                        |
-| chain.CAVER_BAOBAB_RPC_ENDPOINT  | Klaytn Baobab RPC endpoint                                                                         |
-| datbaseEndpoint                  | Database End Point                                                                                 |
-| openSearch.OPEN_SEARCH_URL       | elastic open search url                                                                            |
-| redis.REDIS_ENDPOINT             | redis endpoint                                                                                     |
-| apiEndpint                       | this endpoint should match host of api                                                             |
+| parameter                 | value                                     |
+| ------------------------- | ----------------------------------------- |
+| global.nameOverride       | override defulat name `finder`            |
+| global.network            | `baobab` or `cypress`                     |
+| global.profile            | `stag`, `prod`                            |
+| global.projectId          | google project id                         |
+| global.namespace          | create service aacount with the namespace |
+| global.serviceAccountName | service account name                      |
 
 ## SPRING_PROFILES_ACTIVE
 
@@ -73,16 +62,15 @@ global:
   network: baobab
   profile: prod
   namespace: finder
+  projectId: klaytn-finder
   serviceAccountName: sa-finder-service
-  serviceAccountEmail: arn:aws:iam:************:role/klaytn_cluster_prod-finder-****
 
 api:
   front:
-    ingress: #alb.ingress.kubernetes.io/group.name
     images:
-      repository: public.ecr.aws/y1e5c4k9/finder-api
-      tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
-    host: test-prod-baobab-api.klaytnfinder.io
+      repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
+      tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
+    host: baobab-api.klaytnfinder.io
     replicas: 1
     env:
       - name: SPRING_PROFILES_ACTIVE
@@ -97,9 +85,9 @@ api:
   papi:
     images:
       ingress: #alb.ingress.kubernetes.io/group.name
-      repository: public.ecr.aws/y1e5c4k9/finder-api
-      tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
-    host: test-prod-baobab-papi.klaytnfinder.io
+      repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
+      tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
+    host: prod-baobab-papi.klaytnfinder.io
     replicas: 1
     env:
       - name: SPRING_PROFILES_ACTIVE
@@ -114,9 +102,9 @@ api:
   oapi:
     ingress: #alb.ingress.kubernetes.io/group.name
     images:
-      repository: public.ecr.aws/y1e5c4k9/finder-oapi
+      repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-oapi
       tag: public-06-d873c1e4b5760469a43918edd22ea17336b36db8
-    host: test-prod-baobab-oapi.klaytnfinder.io
+    host: prod-baobab-oapi.klaytnfinder.io
     replicas: 1
     env:
       - name: SPRING_PROFILES_ACTIVE
@@ -131,9 +119,9 @@ api:
 worker:
   ingress: #alb.ingress.kubernetes.io/group.name
   images:
-    repository: public.ecr.aws/y1e5c4k9/finder-worker
-    tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
-  host: test-worker-api.klaytnfinder.io
+    repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-worker
+    tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
+  host: worker-api.klaytnfinder.io
   replicas: 1
   env:
     - name: SPRING_PROFILES_ACTIVE
@@ -149,9 +137,9 @@ worker:
 compiler:
   ingress: #alb.ingress.kubernetes.io/group.name
   images:
-    repository: public.ecr.aws/y1e5c4k9/finder-worker
-    tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
-  host: test-worker-api.klaytnfinder.io
+    repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-worker
+    tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
+  host: worker-api.klaytnfinder.io
   replicas: 1
   env:
     - name: SPRING_PROFILES_ACTIVE
