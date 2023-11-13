@@ -5,7 +5,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "gce-interal"
     ingress.gcp.kubernetes.io/pre-shared-cert: "klaytnfinder-dev"
-    kubernetes.io/ingress.allow-http: "false"
     networking.gke.io/v1beta1.FrontendConfig: "http-to-https"
 spec:
   rules:

@@ -32,8 +32,6 @@ spec:
               exec:
                 command: ["/bin/sh", "-c", "sleep 40"]
           envFrom:
-            # - configMapRef:
-            #     name: finder-config-map
             - secretRef:
                 name: finder-secrets
           env:
