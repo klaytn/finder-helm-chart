@@ -37,7 +37,8 @@ spec:
             - secretRef:
                 name: finder-secrets              
           env:
-            {{ .Values.compiler.env | toYaml | nindent 12 }}          
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
             - name: JAVA_OPTS
               value: -Xms1G -Xmx1G                        
 

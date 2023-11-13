@@ -35,7 +35,16 @@ spec:
             - secretRef:
                 name: finder-secrets
           env:
-            {{ .Values.api.front.env | toYaml | nindent 12 }}          
+            - name: SPRING_PROFILES_ACTIVE
+            {{- if and (eq .Values.global.profile "prod") (eq .Values.global.network "baobab") }}
+              value: prodBaobab,api
+            {{- else if and (eq .Values.global.profile "prod") (eq .Values.global.network "cypress") }}
+              value: prodCypress,api
+            {{- else if and (eq .Values.global.profile "stage") (eq .Values.global.network "baobab") }}
+              value: stagBaobab,all,devAuthToken
+            {{- else if and (eq .Values.global.profile "stage") (eq .Values.global.network "cypress") }}
+              value: stagCypress,all,devAuthToken
+            {{- end }}
             - name: JAVA_OPTS
               value: -Xms2G -Xmx2G                      
           ports:

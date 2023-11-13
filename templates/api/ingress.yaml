@@ -9,7 +9,7 @@ metadata:
     networking.gke.io/v1beta1.FrontendConfig: "http-to-https"
 spec:
   rules:
-    - host: {{ .Values.api.front.host }}
+    - host: {{ .Values.global.network}}-api.{{ .Values.global.domain }}
       http:
         paths:
           - pathType: ImplementationSpecific

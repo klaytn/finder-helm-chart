@@ -26,18 +26,19 @@ kubectl create namespace finder
 
 | parameter                 | value                                     |
 | ------------------------- | ----------------------------------------- |
-| global.nameOverride       | override defulat name `finder`            |
+| global.nameOverride       | override default name `finder`            |
 | global.network            | `baobab` or `cypress`                     |
 | global.profile            | `stag`, `prod`                            |
 | global.projectId          | google project id                         |
 | global.namespace          | create service aacount with the namespace |
+| global.domain             | domain name                               |
 | global.serviceAccountName | service account name                      |
 
 ## SPRING_PROFILES_ACTIVE
 
 Each service has an environment parameter `SPRING_PROFILES_ACTIVE`. Changing this parameter changes the services that are run, so please refer to the table below and fill it out.
 
-| serivce  | profile | network | value                          |
+| service  | profile | network | value                          |
 | -------- | ------- | ------- | ------------------------------ |
 | api      | prod    | baobab  | `prodBaobab,api`               |
 | api      | prod    | cypress | `prodCypress,api`              |
@@ -63,6 +64,7 @@ global:
   profile: prod
   namespace: finder
   projectId: klaytn-finder
+  domain: klaytnfinder.io
   serviceAccountName: sa-finder-service
 
 api:
@@ -70,7 +72,6 @@ api:
     images:
       repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
       tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
-    host: baobab-api.klaytnfinder.io
     replicas: 1
     env:
       - name: SPRING_PROFILES_ACTIVE
@@ -87,7 +88,6 @@ api:
       ingress: #alb.ingress.kubernetes.io/group.name
       repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
       tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
-    host: prod-baobab-papi.klaytnfinder.io
     replicas: 1
     env:
       - name: SPRING_PROFILES_ACTIVE
@@ -104,7 +104,6 @@ api:
     images:
       repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-oapi
       tag: public-06-d873c1e4b5760469a43918edd22ea17336b36db8
-    host: prod-baobab-oapi.klaytnfinder.io
     replicas: 1
     env:
       - name: SPRING_PROFILES_ACTIVE
@@ -121,7 +120,6 @@ worker:
   images:
     repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-worker
     tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
-  host: worker-api.klaytnfinder.io
   replicas: 1
   env:
     - name: SPRING_PROFILES_ACTIVE
@@ -139,7 +137,6 @@ compiler:
   images:
     repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-worker
     tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
-  host: worker-api.klaytnfinder.io
   replicas: 1
   env:
     - name: SPRING_PROFILES_ACTIVE

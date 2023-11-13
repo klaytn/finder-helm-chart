@@ -4,7 +4,8 @@ global:
   network:
   #[baobab, cypress]
   profile:
-  #[dev, stag, prod]
+  #[stag, prod]
+  domain:
   serviceAccountName: sa-finder-service
   namespace: finder
 
@@ -13,11 +14,7 @@ api:
     images:
       repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
       tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
-    host:
     replicas: 1
-    env:
-      - name: SPRING_PROFILES_ACTIVE
-        value:
     resources:
       requests:
         cpu: 1000m
@@ -29,11 +26,7 @@ api:
     images:
       repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
       tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
-    host:
     replicas: 1
-    env:
-      - name: SPRING_PROFILES_ACTIVE
-        value:
     resources:
       requests:
         cpu: 1000m
@@ -45,11 +38,7 @@ api:
     images:
       repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-oapi
       tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
-    host:
     replicas: 1
-    env:
-      - name: SPRING_PROFILES_ACTIVE
-        value:
     resources:
       requests:
         cpu: 2000m
@@ -63,11 +52,7 @@ worker:
   images:
     repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-worker
     tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
-  host:
   replicas: 1
-  env:
-    - name: SPRING_PROFILES_ACTIVE
-      value:
   resources:
     requests:
       cpu: 1000m
@@ -81,11 +66,7 @@ compiler:
   images:
     repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-compiler-api
     tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
-  host:
   replicas: 1
-  env:
-    - name: SPRING_PROFILES_ACTIVE
-      value:
   resources:
     requests:
       cpu: 1000m
