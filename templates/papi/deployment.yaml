@@ -39,13 +39,13 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
             {{- if and (eq .Values.global.profile "prod") (eq .Values.global.network "baobab") }}
-              value: prodBaobab,papi
+              value: prod,prodBaobab,papi
             {{- else if and (eq .Values.global.profile "prod") (eq .Values.global.network "cypress") }}
-              value: prodCypress,papi
+              value: prod,prodCypress,papi
             {{- else if and (eq .Values.global.profile "stage") (eq .Values.global.network "baobab") }}
-              value: stagBaobab,devAuthToken
+              value: stag,stagBaobab,devAuthToken
             {{- else if and (eq .Values.global.profile "stage") (eq .Values.global.network "cypress") }}
-              value: stagCypress,devAuthToken
+              value: stag,stagCypress,devAuthToken
             {{- end }}
             - name: JAVA_OPTS
               value: -Xms1G -Xmx1G                        

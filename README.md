@@ -38,20 +38,20 @@ kubectl create namespace finder
 
 Each service has an environment parameter `SPRING_PROFILES_ACTIVE`. Changing this parameter changes the services that are run, so please refer to the table below and fill it out.
 
-| service  | profile | network | value                          |
-| -------- | ------- | ------- | ------------------------------ |
-| api      | prod    | baobab  | `prodBaobab,api`               |
-| api      | prod    | cypress | `prodCypress,api`              |
-| api      | stage   | baobab  | `stagBaobab,all,devAuthToken`  |
-| api      | stage   | cypress | `stagCypress,all,devAuthToken` |
-| oapi     | prod    | baobab  | `prodBaobab`                   |
-| oapi     | prod    | cypress | `prodCypress`                  |
-| oapi     | stage   | baobab  | `stagBaobab`                   |
-| oapi     | stage   | cypress | `stagCypress`                  |
-| papi     | prod    | baobab  | `prodBaobab,papi`              |
-| papi     | prod    | cypress | `prodCypress,papi`             |
-| worker   |         |         | `prod`                         |
-| compiler |         |         | `prod`                         |
+| service  | profile | network | value                               |
+| -------- | ------- | ------- | ----------------------------------- |
+| api      | prod    | baobab  | `prod,prodBaobab,api`               |
+| api      | prod    | cypress | `prod,prodCypress,api`              |
+| api      | stage   | baobab  | `stag,stagBaobab,all,devAuthToken`  |
+| api      | stage   | cypress | `stag,stagCypress,all,devAuthToken` |
+| oapi     | prod    | baobab  | `prod,prodBaobab`                   |
+| oapi     | prod    | cypress | `prod,prodCypress`                  |
+| oapi     | stage   | baobab  | `stag,stagBaobab`                   |
+| oapi     | stage   | cypress | `stag,stagCypress`                  |
+| papi     | prod    | baobab  | `prod,prodBaobab,papi`              |
+| papi     | prod    | cypress | `prod,prodCypress,papi`             |
+| worker   |         |         | `prod`                              |
+| compiler |         |         | `prod`                              |
 
 ## Exmaple for Values.yaml
 
