@@ -9,59 +9,59 @@ metadata:
     networking.gke.io/v1beta1.FrontendConfig: "http-to-https"
 spec:
   rules:
-    - host: {{ .Values.global.network}}-api.{{ .Values.global.domain }}
+  - host: {{ .Values.global.network}}-api.{{ .Values.global.domain }}
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /api/*
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-api
+            port:
+              number: 8080
+      - pathType: ImplementationSpecific
+        path: /ws
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-api
+            port:
+              number: 8080
+  - host: {{ .Values.global.network}}-oapi.{{ .Values.global.domain }}
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /*
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-oapi
+            port:
+              number: 8080
+  - host: {{ .Values.global.network}}-papi.{{ .Values.global.domain }}
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /*
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-papi
+            port:
+              number: 8080
+  - host: compiler-api.{{ .Values.global.domain }}
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-compiler
+            port:
+              number: 8080
+  - host: worker-api.{{ .Values.global.domain }}
       http:
         paths:
-          - pathType: ImplementationSpecific
-            path: /api*
-            backend:
-              service:
-                name: {{ include "finder.fullname" . }}-api
-                port:
-                  number: 8080
-          - pathType: ImplementationSpecific
-            path: /ws
-            backend:
-              service:
-                name: {{ include "finder.fullname" . }}-api
-                port:
-                  number: 8080
-    - host: {{ .Values.global.network}}-oapi.{{ .Values.global.domain }}
-      http:
-        paths:
-          - pathType: ImplementationSpecific
-            path: /*
-            backend:
-              service:
-                name: {{ include "finder.fullname" . }}-oapi
-                port:
-                  number: 8080
-    - host: {{ .Values.global.network}}-papi.{{ .Values.global.domain }}
-      http:
-        paths:
-          - pathType: ImplementationSpecific
-            path: /api*
-            backend:
-              service:
-                name: {{ include "finder.fullname" . }}-papi
-                port:
-                  number: 8080
-    - host: compiler-api.{{ .Values.global.domain }}
-      http:
-        paths:
-          - pathType: ImplementationSpecific
-            backend:
-              service:
-                name: {{ include "finder.fullname" . }}-compiler
-                port:
-                  number: 8080
-    - host: worker-api.{{ .Values.global.domain }}
-      http:
-        paths:
-          - pathType: ImplementationSpecific
-            path: /api*
-            backend:
-              service:
-                name: {{ include "finder.fullname" . }}-worker
-                port:
-                  number: 8080
+        - pathType: ImplementationSpecific
+          path: /*
+          backend:
+            service:
+              name: {{ include "finder.fullname" . }}-worker
+              port:
+                number: 8080
