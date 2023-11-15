@@ -2,6 +2,7 @@ apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
 metadata:
   name: http-to-https
+  namespace: { { .Values.global.namespace } }
 spec:
   redirectToHttps:
     enabled: true

@@ -1,0 +1,20 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: finder-certificate
+  namespace: { { .Values.global.namespace } }
+spec:
+  domains:
+    - { { .Values.global.domain } }
+    - www.{{ .Values.global.domain }}
+    - baobab.{{ .Values.global.domain }}
+    - baobab-api.{{ .Values.global.domain }}
+    - cypress-api.{{ .Values.global.domain }}
+    - baobab-oapi.{{ .Values.global.domain }}
+    - cypress-oapi.{{ .Values.global.domain }}
+    - baobab-papi.{{ .Values.global.domain }}
+    - cypress-papi.{{ .Values.global.domain }}
+    - worker-api.{{ .Values.global.domain }}
+    - compiler-api.{{ .Values.global.domain }}
+    - zookeeper.{{ .Values.global.domain }}
+    - argocd.{{ .Values.global.domain }}
