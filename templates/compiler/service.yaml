@@ -4,9 +4,6 @@ metadata:
   labels:
     app:  {{ include "finder.fullname" . }}-compiler
   name:  {{ include "finder.fullname" . }}-compiler
-  annotations:
-    cloud.google.com/backend-config: '{"ports": {"8080":"finder-backend-config"}, "default": "finder-backend-config"}'
-    cloud.google.com/neg: '{"ingress": true}'
 spec:
   ports:
     - name: 8080-8080
