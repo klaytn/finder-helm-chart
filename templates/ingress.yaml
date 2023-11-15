@@ -56,12 +56,12 @@ spec:
             port:
               number: 8080
   - host: worker-api.{{ .Values.global.domain }}
-      http:
-        paths:
-        - pathType: ImplementationSpecific
-          path: /*
-          backend:
-            service:
-              name: {{ include "finder.fullname" . }}-worker
-              port:
-                number: 8080
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /*
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-worker
+            port:
+              number: 8080
