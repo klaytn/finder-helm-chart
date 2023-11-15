@@ -1,14 +1,14 @@
 apiVersion: v1
 entries:
   finder:
-    - apiVersion: v2
-      appVersion: 1.0.1
-      created: "2023-11-15T20:26:19.455906+09:00"
-      description: A Helm chart for Kubernetes
-      digest: f145d47e529791a0dc62d93214e44300a5505c0fe1e746a845b13815bdc2f4bf
-      name: finder
-      type: application
-      urls:
-        - charts/finder-1.0.1.tgz
-      version: 1.0.1
-generated: "2023-11-15T20:26:19.452838+09:00"
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-11-15T20:38:31.561111+09:00"
+    description: A Helm chart for Kubernetes
+    digest: d727f06d429e108f4e9895af2a32c684175e56ee4b163ab8e890c531fbf5eadf
+    name: finder
+    type: application
+    urls:
+    - charts/finder-1.0.0.tgz
+    version: 1.0.0
+generated: "2023-11-15T20:38:31.55976+09:00"

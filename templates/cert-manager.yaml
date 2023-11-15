@@ -2,10 +2,10 @@ apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
   name: finder-certificate
-  namespace: { { .Values.global.namespace } }
+  namespace: finder
 spec:
   domains:
-    - { { .Values.global.domain } }
+    - {{ .Values.global.domain }}
     - www.{{ .Values.global.domain }}
     - baobab.{{ .Values.global.domain }}
     - baobab-api.{{ .Values.global.domain }}
