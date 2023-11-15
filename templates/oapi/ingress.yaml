@@ -4,7 +4,7 @@ metadata:
   name: {{ include "finder.fullname" . }}-oapi
   annotations:
     kubernetes.io/ingress.class: "gce"
-    ingress.gcp.kubernetes.io/pre-shared-cert: "klaytnfinder-dev"
+    ingress.gcp.kubernetes.io/pre-shared-cert: "klaytnfinder-net"
     kubernetes.io/ingress.global-static-ip-name: "finder-prod-api-ip"
     networking.gke.io/v1beta1.FrontendConfig: "http-to-https"
 spec:

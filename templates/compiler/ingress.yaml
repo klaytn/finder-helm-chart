@@ -4,7 +4,7 @@ metadata:
   name: {{ include "finder.fullname" . }}-compiler
   annotations:
     kubernetes.io/ingress.class: "gce-interal"
-    ingress.gcp.kubernetes.io/pre-shared-cert: "klaytnfinder-dev"
+    ingress.gcp.kubernetes.io/pre-shared-cert: "klaytnfinder-net"
     networking.gke.io/v1beta1.FrontendConfig: "http-to-https"
 spec:
   rules:
