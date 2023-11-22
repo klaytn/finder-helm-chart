@@ -50,16 +50,19 @@ spec:
     http:
       paths:
       - pathType: ImplementationSpecific
-        path: /compile
+        path: /*
         backend:
           service:
             name: {{ include "finder.fullname" . }}-compiler
             port:
               number: 8080
+  - host: worker-api.{{ .Values.global.domain }}
+    http:
+      paths:
       - pathType: ImplementationSpecific
-        path: /options
+        path: /*
         backend:
           service:
-            name: {{ include "finder.fullname" . }}-compiler
+            name: {{ include "finder.fullname" . }}-worker
             port:
               number: 8080
