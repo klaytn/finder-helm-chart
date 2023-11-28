@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "finder.fullname" . }}-compiler
+  name: finder-compiler
 spec:
   selector:
     matchLabels:
-      app: {{ include "finder.fullname" . }}-compiler
+      app: finder-compiler
   replicas: {{ .Values.compiler.replicas }}
   strategy:
     type: RollingUpdate
@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ include "finder.fullname" . }}-compiler
+        app: finder-compiler
     spec:
       serviceAccountName: {{ .Values.global.serviceAccountName }}
       terminationGracePeriodSeconds: 60
@@ -24,7 +24,7 @@ spec:
           value: "finder-node-pool"
           effect: "NoSchedule"
       containers:
-        - name: {{ include "finder.fullname" . }}-compiler
+        - name: finder-compiler
           image: "{{ .Values.compiler.images.repository }}:{{ .Values.compiler.images.tag }}"
           imagePullPolicy: Always
           lifecycle:
