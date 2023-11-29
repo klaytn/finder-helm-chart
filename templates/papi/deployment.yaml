@@ -11,7 +11,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 0      
+      maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -22,7 +22,7 @@ spec:
       tolerations:
         - key: "type"
           value: "finder-node-pool"
-          effect: "NoSchedule"    
+          effect: "NoSchedule"
       containers:
         - name: {{ include "finder.fullname" . }}-papi
           image: "{{ .Values.api.papi.images.repository }}:{{ .Values.api.papi.images.tag }}"
@@ -48,21 +48,21 @@ spec:
               value: stag,stagCypress,devAuthToken
             {{- end }}
             - name: JAVA_OPTS
-              value: -Xms1G -Xmx1G                        
+              value: -Xms1G -Xmx1G
 
           ports:
             - containerPort: 8080
           resources:
-            {{- toYaml .Values.api.papi.resources | nindent 12 }}  
+            {{- toYaml .Values.api.papi.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
               port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 90
+            periodSeconds: 20
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 8080
-            initialDelaySeconds: 3
-            periodSeconds: 3              
+            initialDelaySeconds: 90
+            periodSeconds: 20
