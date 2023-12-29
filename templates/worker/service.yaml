@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app:  {{ include "finder.fullname" . }}-worker
-  name:  {{ include "finder.fullname" . }}-worker
+    app:  finder-worker
+  name:  finder-worker
 spec:
   ports:
     - name: 8080-8080
@@ -11,5 +11,5 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app:  {{ include "finder.fullname" . }}-worker
+    app:  finder-worker
   type: ClusterIP

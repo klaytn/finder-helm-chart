@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "finder.fullname" . }}-compiler
+  name: finder-compiler
 spec:
   selector:
     matchLabels:
-      app: {{ include "finder.fullname" . }}-compiler
+      app: finder-compiler
   replicas: {{ .Values.compiler.replicas }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 0      
+      maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: {{ include "finder.fullname" . }}-compiler
+        app: finder-compiler
     spec:
       serviceAccountName: {{ .Values.global.serviceAccountName }}
       terminationGracePeriodSeconds: 60
       tolerations:
         - key: "type"
-          value: "service-ng"
-          effect: "NoSchedule"    
+          value: "finder-node-pool"
+          effect: "NoSchedule"
       containers:
-        - name: {{ include "finder.fullname" . }}-compiler
+        - name: finder-compiler
           image: "{{ .Values.compiler.images.repository }}:{{ .Values.compiler.images.tag }}"
           imagePullPolicy: Always
           lifecycle:
@@ -32,28 +32,27 @@ spec:
               exec:
                 command: ["/bin/sh", "-c", "sleep 40"]
           envFrom:
-            # - configMapRef:
-            #     name: finder-config-map     
             - secretRef:
-                name: finder-secrets              
+                name: finder-secrets
           env:
-            {{ .Values.compiler.env | toYaml | nindent 12 }}          
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
             - name: JAVA_OPTS
-              value: -Xms1G -Xmx1G                        
+              value: -Xms1G -Xmx1G
 
           ports:
             - containerPort: 8080
           resources:
-            {{- toYaml .Values.compiler.resources | nindent 12 }}            
+            {{- toYaml .Values.compiler.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
               port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 180
+            periodSeconds: 30
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 8080
-            initialDelaySeconds: 3
-            periodSeconds: 3              
+            initialDelaySeconds: 180
+            periodSeconds: 30

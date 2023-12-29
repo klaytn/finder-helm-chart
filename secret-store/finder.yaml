@@ -52,30 +52,38 @@ spec:
       remoteRef:
         key: finder
         property: MYSQL_COMMON_ENDPOINT
-    - secretKey: AWS_S3_REGION
+    - secretKey: MYSQL_USER
       remoteRef:
         key: finder
-        property: AWS_S3_REGION
-    - secretKey: AWS_SECRETS_MANAGER_ARN
+        property: MYSQL_USER
+    - secretKey: MYSQL_PASSWORD
       remoteRef:
         key: finder
-        property: AWS_SECRETS_MANAGER_ARN
-    - secretKey: AWS_SECRETS_MANAGER_REGION
+        property: MYSQL_PASSWORD
+    - secretKey: GOOGLE_APPLICATION_CREDENTIALS
       remoteRef:
         key: finder
-        property: AWS_SECRETS_MANAGER_REGION
-    - secretKey: AWS_S3_PRIVATE_BUCKET
+        property: GOOGLE_APPLICATION_CREDENTIALS
+    - secretKey: GCP_PROJECT_ID
       remoteRef:
         key: finder
-        property: AWS_S3_PRIVATE_BUCKET
-    - secretKey: AWS_S3_PUBLIC_BUCKET
+        property: GCP_PROJECT_ID
+    - secretKey: GCP_REGION
       remoteRef:
         key: finder
-        property: AWS_S3_PUBLIC_BUCKET
-    - secretKey: AWS_CDN_URL
+        property: GCP_REGION
+    - secretKey: GCS_PRIVATE_BUCKET
       remoteRef:
         key: finder
-        property: AWS_CDN_URL
+        property: GCS_PRIVATE_BUCKET
+    - secretKey: GCS_PUBLIC_BUCKET
+      remoteRef:
+        key: finder
+        property: GCS_PUBLIC_BUCKET
+    - secretKey: GCP_CDN_URL
+      remoteRef:
+        key: finder
+        property: GCP_CDN_URL
     - secretKey: CAVER_CYPRESS_RPC_ENDPOINT
       remoteRef:
         key: finder

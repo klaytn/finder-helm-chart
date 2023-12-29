@@ -11,7 +11,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 0      
+      maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -21,8 +21,8 @@ spec:
       terminationGracePeriodSeconds: 60
       tolerations:
         - key: "type"
-          value: "service-ng"
-          effect: "NoSchedule"    
+          value: "finder-node-pool"
+          effect: "NoSchedule"
       containers:
         - name: {{ include "finder.fullname" . }}-api
           image: "{{ .Values.api.front.images.repository }}:{{ .Values.api.front.images.tag }}"
@@ -32,27 +32,34 @@ spec:
               exec:
                 command: ["/bin/sh", "-c", "sleep 40"]
           envFrom:
-            # - configMapRef:
-            #     name: finder-config-map
             - secretRef:
                 name: finder-secrets
           env:
-            {{ .Values.api.front.env | toYaml | nindent 12 }}          
+            - name: SPRING_PROFILES_ACTIVE
+            {{- if and (eq .Values.global.profile "prod") (eq .Values.global.network "baobab") }}
+              value: prod,prodBaobab,api
+            {{- else if and (eq .Values.global.profile "prod") (eq .Values.global.network "cypress") }}
+              value: prod,prodCypress,api
+            {{- else if and (eq .Values.global.profile "stage") (eq .Values.global.network "baobab") }}
+              value: stag,stagBaobab,all,devAuthToken
+            {{- else if and (eq .Values.global.profile "stage") (eq .Values.global.network "cypress") }}
+              value: stag,stagCypress,all,devAuthToken
+            {{- end }}
             - name: JAVA_OPTS
-              value: -Xms2G -Xmx2G                      
+              value: -Xms2G -Xmx2G
           ports:
             - containerPort: 8080
           resources:
-            {{- toYaml .Values.api.front.resources | nindent 12 }}  
+            {{- toYaml .Values.api.front.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
               port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 90
+            periodSeconds: 20
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 8080
-            initialDelaySeconds: 3
-            periodSeconds: 3              
+            initialDelaySeconds: 90
+            periodSeconds: 20
