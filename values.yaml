@@ -37,7 +37,7 @@ api:
   oapi:
     images:
       repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-oapi
-      tag: public-50273e68d2554aae7fb3cbced2ee091425450151
+      tag: public-c83364ca7fd8c0089b7f1332a2f2cee82a426d93
     replicas: 1
     resources:
       requests:
