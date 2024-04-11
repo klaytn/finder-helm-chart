@@ -25,7 +25,7 @@ api:
   papi:
     images:
       repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
-      tag: public-283aef52a30e4d1195b8661aba02654edc524b7c
+      tag: public-6d20e18b8bf50aeec78119747a4192271f2bfb19
     replicas: 1
     resources:
       requests:
