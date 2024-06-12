@@ -110,7 +110,7 @@ worker:
   enabled: false
   images:
     repository: public.ecr.aws/y1e5c4k9/finder-worker
-    tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
+    tag: public-f2b304db44dfada6d3d006b11c807f3ceb125b17
   host:
   replicas: 1
   env:
