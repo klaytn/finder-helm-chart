@@ -1,0 +1,75 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "finder.fullname" . }}-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "finder-{{ .Values.global.network}}-api-ip"
+    ingress.gcp.kubernetes.io/pre-shared-cert: "finder-cert"
+    networking.gke.io/v1beta1.FrontendConfig: "http-to-https"
+spec:
+  rules:
+  - host: {{ .Values.global.network}}-api.{{ .Values.global.domain }}
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /api/*
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-api
+            port:
+              number: 8080
+      - pathType: ImplementationSpecific
+        path: /ws
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-api
+            port:
+              number: 8080
+      - pathType: ImplementationSpecific
+        path: /actuator/health/readiness
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-api
+            port:
+              number: 8080
+  - host: {{ .Values.global.network}}-oapi.{{ .Values.global.domain }}
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /*
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-oapi
+            port:
+              number: 8080
+  - host: {{ .Values.global.network}}-papi.{{ .Values.global.domain }}
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /*
+        backend:
+          service:
+            name: {{ include "finder.fullname" . }}-papi
+            port:
+              number: 8080
+  - host: compiler-api.{{ .Values.global.domain }}
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /*
+        backend:
+          service:
+            name: finder-compiler
+            port:
+              number: 8080
+  - host: worker-api.{{ .Values.global.domain }}
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /*
+        backend:
+          service:
+            name: finder-worker
+            port:
+              number: 8080

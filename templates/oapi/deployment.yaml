@@ -21,7 +21,7 @@ spec:
       terminationGracePeriodSeconds: 60
       tolerations:
         - key: "type"
-          value: "service-ng"
+          value: "finder-node-pool"
           effect: "NoSchedule"    
       containers:
         - name: {{ include "finder.fullname" . }}-oapi
@@ -37,7 +37,16 @@ spec:
             - secretRef:
                 name: finder-secrets
           env:
-            {{ .Values.api.oapi.env | toYaml | nindent 12 }}          
+            - name: SPRING_PROFILES_ACTIVE
+            {{- if and (eq .Values.global.profile "prod") (eq .Values.global.network "baobab") }}
+              value: prod,prodBaobab
+            {{- else if and (eq .Values.global.profile "prod") (eq .Values.global.network "cypress") }}
+              value: prod,prodCypress
+            {{- else if and (eq .Values.global.profile "stage") (eq .Values.global.network "baobab") }}
+              value: stag,stagBaobab,devAuthToken
+            {{- else if and (eq .Values.global.profile "stage") (eq .Values.global.network "cypress") }}
+              value: stag,stagCypress,devAuthToken
+            {{- end }}
             - name: JAVA_OPTS
               value: -Xms1G -Xmx1G                        
 

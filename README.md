@@ -24,44 +24,34 @@ create namepsace finder
 kubectl create namespace finder
 ```
 
-| parameter                        | value                                                                                              |
-| -------------------------------- | -------------------------------------------------------------------------------------------------- |
-| global.nameOverride              | override defulat name `finder`                                                                     |
-| global.network                   | `baobab` or `cypress`                                                                              |
-| global.profile                   | `stag`, `prod`                                                                                     |
-| global.namespace                 | create service aacount with the namespace                                                          |
-| global.serviceAccountRoleArn     | service account role arn created                                                                   |
-| secretManager.REGION             | aws secret manager regsion                                                                         |
-| secretManager.ARN                | aws secret manager ARN `arn:aws:secretsmanager:${region}:${identity-number}:secret:${secret name}` |
-| s3.AWS_S3_REGION                 | AWS S3 region                                                                                      |
-| s3.AWS_S3_PRIVATE_BUCKET         | AWS S3 private bucket name                                                                         |
-| s3.AWS_S3_PUBLIC_BUCKET          | AWS S3 public bucket name                                                                          |
-| cdn.URL                          | CDN service URL                                                                                    |
-| chain.CAVER_CYPRESS_RPC_ENDPOINT | Klaytn Cypress RPC endpoint                                                                        |
-| chain.CAVER_BAOBAB_RPC_ENDPOINT  | Klaytn Baobab RPC endpoint                                                                         |
-| datbaseEndpoint                  | Database End Point                                                                                 |
-| openSearch.OPEN_SEARCH_URL       | elastic open search url                                                                            |
-| redis.REDIS_ENDPOINT             | redis endpoint                                                                                     |
-| apiEndpint                       | this endpoint should match host of api                                                             |
+| parameter                 | value                                     |
+| ------------------------- | ----------------------------------------- |
+| global.nameOverride       | override default name `finder`            |
+| global.network            | `baobab` or `cypress`                     |
+| global.profile            | `stag`, `prod`                            |
+| global.projectId          | google project id                         |
+| global.namespace          | create service aacount with the namespace |
+| global.domain             | domain name                               |
+| global.serviceAccountName | service account name                      |
 
 ## SPRING_PROFILES_ACTIVE
 
 Each service has an environment parameter `SPRING_PROFILES_ACTIVE`. Changing this parameter changes the services that are run, so please refer to the table below and fill it out.
 
-| serivce  | profile | network | value                          |
-| -------- | ------- | ------- | ------------------------------ |
-| api      | prod    | baobab  | `prodBaobab,api`               |
-| api      | prod    | cypress | `prodCypress,api`              |
-| api      | stage   | baobab  | `stagBaobab,all,devAuthToken`  |
-| api      | stage   | cypress | `stagCypress,all,devAuthToken` |
-| oapi     | prod    | baobab  | `prodBaobab`                   |
-| oapi     | prod    | cypress | `prodCypress`                  |
-| oapi     | stage   | baobab  | `stagBaobab`                   |
-| oapi     | stage   | cypress | `stagCypress`                  |
-| papi     | prod    | baobab  | `prodBaobab,papi`              |
-| papi     | prod    | cypress | `prodCypress,papi`             |
-| worker   |         |         | `prod`                         |
-| compiler |         |         | `prod`                         |
+| service  | profile | network | value                               |
+| -------- | ------- | ------- | ----------------------------------- |
+| api      | prod    | baobab  | `prod,prodBaobab,api`               |
+| api      | prod    | cypress | `prod,prodCypress,api`              |
+| api      | stage   | baobab  | `stag,stagBaobab,all,devAuthToken`  |
+| api      | stage   | cypress | `stag,stagCypress,all,devAuthToken` |
+| oapi     | prod    | baobab  | `prod,prodBaobab`                   |
+| oapi     | prod    | cypress | `prod,prodCypress`                  |
+| oapi     | stage   | baobab  | `stag,stagBaobab`                   |
+| oapi     | stage   | cypress | `stag,stagCypress`                  |
+| papi     | prod    | baobab  | `prod,prodBaobab,papi`              |
+| papi     | prod    | cypress | `prod,prodCypress,papi`             |
+| worker   |         |         | `prod`                              |
+| compiler |         |         | `prod`                              |
 
 ## Exmaple for Values.yaml
 
@@ -73,61 +63,15 @@ global:
   network: baobab
   profile: prod
   namespace: finder
+  projectId: klaytn-finder
+  domain: klaytnfinder.io
   serviceAccountName: sa-finder-service
-  serviceAccountRoleArn: arn:aws:iam:************:role/klaytn_cluster_prod-finder-****
-
-secretManager:
-  REGION: ap-northeast-2
-  ARN: arn:aws:secretsmanager:ap-northeast-2:************:secret:****
-
-s3:
-  AWS_S3_REGION: ap-northeast-2
-  AWS_S3_PRIVATE_BUCKET: klaytn-prod-finder-private
-  AWS_S3_PUBLIC_BUCKET: klaytn-prod-common-public
-
-cdn:
-  URL: https://cdn.********.io
-
-chain:
-  CAVER_CYPRESS_RPC_ENDPOINT: https://public-en.klaytnfinder.io/v1/cypress
-  CAVER_BAOBAB_RPC_ENDPOINT: https://public-en.klaytnfinder.io/v1/baobab
-
-datbaseEndpoint:
-  MYSQL_CYPRESS_01_ENDPOINT: ********.rds.amazonaws.com
-  MYSQL_BAOBAB_01_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0201_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0202_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0203_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0204_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_0205_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_BAOBAB_02_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_CYPRESS_03_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_BAOBAB_03_ENDPOINT: ******.rds.amazonaws.com
-  MYSQL_COMMON_ENDPOINT: ******.rds.amazonaws.com
-
-openSearch:
-  OPEN_SEARCH_URL: https://******.ap-northeast-2.es.amazonaws.com
-
-redis:
-  REDIS_ENDPOINT: ***.clustercfg.apn2.cache.amazonaws.com:6379
-
-zookeeper:
-  ZOOKEEPER_ENDPOINT: zk.****.io:2181
-
-apiEndpoint:
-  COMPILER_API_ENDPOINT: https://compiler-api.******.io/
-  PAPI_API_CYPRESS_ENDPOINT: https://test-prod-cypress-papi.******.io
-  PAPI_API_BAOBAB_ENDPOINT: https://test-prod-baobab-papi.******.io
-apiKeys:
-  CMC_PRO_API_KEY: ******
 
 api:
   front:
-    ingress: #alb.ingress.kubernetes.io/group.name
     images:
-      repository: public.ecr.aws/y1e5c4k9/finder-api
-      tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
-    host: test-prod-baobab-api.klaytnfinder.io
+      repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
+      tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
     replicas: 1
     env:
       - name: SPRING_PROFILES_ACTIVE
@@ -142,9 +86,8 @@ api:
   papi:
     images:
       ingress: #alb.ingress.kubernetes.io/group.name
-      repository: public.ecr.aws/y1e5c4k9/finder-api
-      tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
-    host: test-prod-baobab-papi.klaytnfinder.io
+      repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
+      tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
     replicas: 1
     env:
       - name: SPRING_PROFILES_ACTIVE
@@ -159,9 +102,8 @@ api:
   oapi:
     ingress: #alb.ingress.kubernetes.io/group.name
     images:
-      repository: public.ecr.aws/y1e5c4k9/finder-oapi
+      repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-oapi
       tag: public-06-d873c1e4b5760469a43918edd22ea17336b36db8
-    host: test-prod-baobab-oapi.klaytnfinder.io
     replicas: 1
     env:
       - name: SPRING_PROFILES_ACTIVE
@@ -176,9 +118,8 @@ api:
 worker:
   ingress: #alb.ingress.kubernetes.io/group.name
   images:
-    repository: public.ecr.aws/y1e5c4k9/finder-worker
-    tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
-  host: test-worker-api.klaytnfinder.io
+    repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-worker
+    tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
   replicas: 1
   env:
     - name: SPRING_PROFILES_ACTIVE
@@ -194,9 +135,8 @@ worker:
 compiler:
   ingress: #alb.ingress.kubernetes.io/group.name
   images:
-    repository: public.ecr.aws/y1e5c4k9/finder-worker
-    tag: public-3b7017c3c578da343833d6d6d7a070517e700fbb
-  host: test-worker-api.klaytnfinder.io
+    repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-worker
+    tag: public-4727becfbff481b98b3cb0c77fd0753368ad2d22
   replicas: 1
   env:
     - name: SPRING_PROFILES_ACTIVE
@@ -208,7 +148,6 @@ compiler:
     limits:
       cpu: 1000m
       memory: 2Gi
-
 ```
 
 Installing with my-values.yaml file
