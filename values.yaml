@@ -51,7 +51,7 @@ worker:
   enabled: false
   images:
     repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-worker
-    tag: public-283aef52a30e4d1195b8661aba02654edc524b7c
+    tag: public-f2b304db44dfada6d3d006b11c807f3ceb125b17
   replicas: 1
   resources:
     requests:
