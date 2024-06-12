@@ -13,8 +13,8 @@ api:
   front:
     images:
       repository: asia-northeast3-docker.pkg.dev/klaytn-finder/finder-prod/finder-api
-      tag: public-283aef52a30e4d1195b8661aba02654edc524b7c
-    replicas: 1
+      tag: public-f2b304db44dfada6d3d006b11c807f3ceb125b17
+    replicas: 6
     resources:
       requests:
         cpu: 1000m
